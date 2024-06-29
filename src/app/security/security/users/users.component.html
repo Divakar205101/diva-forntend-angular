@@ -1,0 +1,155 @@
+<div>
+<form class="formCls" [formGroup]="memberMTO" (ngSubmit)="createUser()">
+    <table class="mainTable">
+        <tr>
+            <td class="Space"></td>
+        </tr>
+       <tbody formGroupName="memberVO">
+      <tr>
+        <td>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>User Details</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="form-row">
+                      <div style="display: none;" >
+                        <input formControlName="id" />
+                      </div>
+                      <div formGroupName="roleMasterDO" class="col">
+                        <label for="Title">Role</label>
+                        <select id="inputState" formControlName="id" class="form-control W200">
+                            <option value="">Select</option>                          
+                            <option value="1">Admin</option>                          
+                            <option value="2">Manager</option>                       
+                            <option value="3">User</option>                       
+                          </select>
+                      </div>
+                        <div class="col">
+                            <label for="Title">Title</label>
+                            <select id="inputState" formControlName="title" class="form-control W200">
+                                <option value="">Select</option>                          
+                                <option value="MR">Mr</option>                          
+                                <option value="MS">Ms</option>                          
+                              </select>
+                          </div>
+                          <div class="col">
+                            <label for="First Name">First Name</label>
+                          <input type="text" formControlName="firstName" class="form-control W200" placeholder="First Name">
+                          </div>
+                          <div class="col">
+                            <label for="Last Name">Last Name</label>
+                            <input type="text" formControlName="lastName" class="form-control W200" placeholder="Last Name">
+                          </div>
+                          <div class="col">
+                            <label for="Middle Name">Middle Name</label>
+                        <input type="text" formControlName="middleName" class="form-control W200" placeholder="Middle Name">
+                          </div>
+                     </div>
+                     <div class="form-row mt-3">
+                        <div class="col">
+                            <label for="Middle Name">Adhar Number</label>
+                      <input type="text" formControlName="adharNumber" class="form-control W200" placeholder="Middle Name">
+                          </div>
+                        <div class="col">
+                            <label for="Date of Birth">Date of Birth</label>
+                            <input type="date"  formControlName="dateOfBirth" class="form-control W200" placeholder="Date of Birth">
+                          </div>
+                        <div class="col">
+                            <label for="Middle Name">Age</label>
+                            <input type="text" class="form-control W200" formControlName="age" placeholder="Age">
+                          </div>
+                        <div class="col">
+                            <label for="Middle Name">Country</label>
+                            <select id="inputState"  formControlName="country" class="form-control W200">
+                              <option value="">Select</option>                          
+                              <option value="IND">India</option>                          
+                              <option value="USA">USA</option>                       
+                              <option value="CANDA">Canda</option>                       
+                            </select>
+                          </div>
+                        <div class="col">
+                            <label for="Pan Number">Pan Number</label>
+                          <input type="text" formControlName="panNumber" class="form-control W200" placeholder="Pan Number">
+                          </div>
+                     </div>   
+                  </mat-card-content>
+                </mat-card>
+            </td>
+      </tr>
+      <ng-container formGroupName="memberCommVO">
+      <tr>
+        <td>
+          <mat-card>
+            <mat-card-header>
+                <mat-card-title>Contact Details</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="form-row">
+                  <div class="col">
+                    <label for="Primail">Primail</label>
+                    <input type="text" class="form-control W200" formControlName="primail" placeholder="mail">
+                  </div>
+                <div class="col">
+                    <label for="Mobile Number">Mobile Number</label>
+                    <input type="text" class="form-control W200" formControlName="mobileNumber" placeholder="Mobile Number">
+                  </div>
+                <div class="col">
+                    <label for="LanNumber">Lan Number</label>
+                    <input type="text" class="form-control W200" formControlName="lanNumber" placeholder="Lan Number">
+                  </div>
+                 </div>
+              </mat-card-content>
+            </mat-card>
+        </td>
+      </tr>
+    </ng-container>
+      <tr>
+        <td class="Space"></td>
+      </tr>
+      <tr>
+        <td>
+          <mat-card>
+            <mat-card-header>
+                <mat-card-title>Bank Details</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <thead>
+                    <th>Bank</th>
+                    <th>Account No</th>
+                    <th>IFSC Code</th>
+                    <th>Branch</th>
+                    <th><a type="button" (click)="addBank()" ><i class="fa fa-plus-circle" aria-hidden="true"></i>Add</a></th>
+                  </thead>
+                  <tbody formArrayName="memberBanksVOs">
+                    <tr *ngFor="let itemrow of memberBanksVOs.controls; let i=index" [formGroupName]="i">
+                      <td>
+                        <input formControlName="id" type="hidden" /> 
+                        <input  class="form-control W200" formControlName="bank"  /></td>
+                      <td><input  class="form-control W200" formControlName="accountno" /></td>
+                      <td><input  class="form-control W200" formControlName="ifscCode" /></td>
+                      <td><input  class="form-control W200" formControlName="accountType" /></td>
+                      <td><a (click)="removedBank(i)" ><i class="fa fa-trash" aria-hidden="true"></i></a> </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-card-content>
+            </mat-card>
+        </td>
+      </tr>
+      <tr>
+        <td class="Space"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="divbittons">
+           <button type="submit" class="btn btn-primary">Submit</button>
+           <button type="button" class="btn btn-danger">Cancel</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>   
+    </table>
+</form>
+</div>

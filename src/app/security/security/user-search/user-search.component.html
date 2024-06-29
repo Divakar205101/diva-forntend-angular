@@ -1,0 +1,29 @@
+<form>
+    <table class="mainTable">
+        <tr>
+            <td class="Space"></td>
+        </tr>
+        <tr>
+            <div style="float: right;">
+                <a  [routerLink]="['/createUser']" [queryParams]="{action:'create'}"><button class="btn btn-primary">Create</button></a>
+            </div>
+        </tr>
+    </table>
+    <table id="example" class="display" class="table mx-auto">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>AdharNumber</th>
+            <th>DateOfBirth</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+          <tbody>
+            <!-- DataTable will populate rows here -->
+          </tbody>
+      </table>
+</form>

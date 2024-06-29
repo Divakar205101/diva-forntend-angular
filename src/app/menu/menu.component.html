@@ -1,0 +1,16 @@
+<nav>
+<mat-toolbar class="menucls">
+  <mat-toolbar-row>
+    <ul class="menu">
+      <li *ngFor="let module of modules">
+        <a href="#"><button mat-button>{{ module.moduleName }}</button></a>      
+        <ul class="submenu">
+          <li *ngFor="let feature of module.featuresDOs">                     
+            <a href="{{ feature.compref }}">{{ feature.featurename }}</a>                                
+          </li>
+        </ul>   
+      </li>
+    </ul>
+  </mat-toolbar-row>
+</mat-toolbar>
+</nav>

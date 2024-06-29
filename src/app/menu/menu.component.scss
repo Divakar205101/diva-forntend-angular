@@ -1,0 +1,44 @@
+.menucls {
+  background-color: #fbe417fb;
+  color: #03031d;
+}
+
+nav {
+  margin: 0 auto;
+  display: flex;
+  font-family: AllianzSans;
+}
+
+ul {
+  list-style: none;
+  z-index: 100;
+}
+
+.menu > li, .menu > a {
+  display: inline-block;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu > a {
+  text-decoration: none;
+  display: block;
+  padding: 8px 1.5rem;
+}
+
+.submenu {
+  position: absolute;
+  background-color: #fff;
+  width: 160px;
+  left: 0;
+  display: none;
+  transition: all .15s ease;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px #666;
+}
+
+.menu li:hover > .submenu {
+  display: block;
+}

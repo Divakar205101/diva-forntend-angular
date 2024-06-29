@@ -1,0 +1,113 @@
+<div  class="">
+<form [formGroup]="moduleMo" #savemodule (ngSubmit)="createModule()">
+  <table class="mainTable">
+    <tr>
+      <td class="Space"></td>
+    </tr> 
+    <tr><td class="mainsHeaderText"><h4 id="">Module Create</h4></td></tr>
+    <tr>
+      <td class="Space"></td>
+    </tr>   
+    <tr>
+      <td class="Space"></td>
+    </tr>
+    <tr><td class="subHeaderText"><h4 id="">Module Details</h4></td></tr>
+    <ng-container  formGroupName="moduleDO">
+    <tr>
+      <td>
+      <table class="innerTable">
+        <tbody>
+       <tr>
+        <tr>
+          <td class="labeltextcls"><label  for="Module Name">ModuleID</label><span class="required">*</span></td>
+          <td class="labeltextcls"><label for="Module Name">Module Name</label><span class="required">*</span></td>
+          <td class="labeltextcls"><label  for="Module Name">Description</label><span class="required">*</span></td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput formControlName="moduleId" placeholder="Module Name">
+            </mat-form-field>
+           </td>
+          <td>
+            <mat-form-field>
+              <input matInput formControlName="moduleName" placeholder="Module UI Name">
+            </mat-form-field>
+          </td>
+          <td class="fieldText">
+            <mat-form-field>
+              <textarea matInput formControlName="description" ></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </td>
+    </tr>
+     <tr>
+      <td class="Space"></td>
+    </tr>   
+    <tr>
+      <td class="Space"></td>
+    </tr>
+      <tr><td class="subHeaderText"><h4 id="">Feature Datails</h4></td></tr>
+     <tr>
+      <td>
+       <table class="innerTable" [cellPadding]="0"  >
+        <tbody>
+         <tr>
+          <td class="labeltextcls"><label  for="Module Name">FeatureID</label><span class="required">*</span></td>
+          <td class="labeltextcls"><label  for="Module Name">Feature Name</label><span class="required">*</span></td>
+          <td class="labeltextcls"><label  for="Module Name">Active</label><span class="required">*</span></td>
+          <td class="labeltextcls"><label  for="Module Name">Description</label><span class="required">*</span></td>
+          <td class="labeltextcls"><button mat-raised-button type="button" color="primary" 
+             (click)="openPopUp()">Add</button></td>
+         </tr>
+         <tbody formArrayName="featuresDOs">
+         <tr  *ngFor="let feature of  featuresDOs.controls; let i = index">
+                <ng-container [formGroupName]="i">
+                  <td class="fieldText">
+                    <mat-form-field>
+                      <input matInput formControlName="fetureId" placeholder="Feature">
+                    </mat-form-field>
+                  </td>  
+                <td class="fieldText">
+                  <mat-form-field>
+                    <input matInput formControlName="featurename" placeholder="Feature Name">
+                  </mat-form-field>
+                </td>
+                <td class="fieldText">
+                  <mat-form-field>
+                    <input matInput formControlName="status" placeholder="Feature UI Name">
+                  </mat-form-field>
+                </td>
+                <td class="fieldText">
+                  <mat-form-field>
+                    <textarea matInput formControlName="description" ></textarea>
+                  </mat-form-field>
+                </td>
+                <td class="fieldText">              
+                   <button type="button" (click)="removeFeature(i)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>               
+                </td> 
+              </ng-container>
+              </tr>
+        </tbody>
+       </table>
+      </td>
+     </tr>
+     </ng-container>
+     <tr>
+      <td class="Space"></td>
+     </tr>
+     <tr>
+      <td class="Space"></td>
+     </tr>
+     <tr class="align-right">
+      <td>
+        <button  mat-raised-button color="primary" type="submit">Submit</button>
+      </td>
+     </tr>
+  </table>
+</form>
+</div>
