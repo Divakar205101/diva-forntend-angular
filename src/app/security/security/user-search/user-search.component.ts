@@ -65,6 +65,11 @@ export class UserSearchComponent implements OnInit, OnDestroy {
   }
 
   editmember(memberId: any): void {
-    this.router.navigate(['/edit', memberId]);
+    this.router.navigate(['/editmember'],{
+      queryParams :{
+        action : "edit",
+        memberautoId : memberId
+      }
+    });
   }
 }

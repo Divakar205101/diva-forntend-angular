@@ -87,7 +87,7 @@
                 <div class="form-row">
                   <div class="col">
                     <label for="Primail">Primail</label>
-                    <input type="text" class="form-control W200" formControlName="primail" placeholder="mail">
+                    <input type="text" class="form-control W200" formControlName="primail" placeholder="Email">
                   </div>
                 <div class="col">
                     <label for="Mobile Number">Mobile Number</label>
@@ -111,7 +111,7 @@
           <label>Bank Details</label>
           <mat-card>
               <mat-card-content>
-                <table>
+                <table class="innertable">
                   <thead>
                     <th>Bank</th>
                     <th>Account No</th>
@@ -142,7 +142,7 @@
         <td>
           <div class="divbittons">
            <button type="submit" class="btn btn-primary">Submit</button>
-           <button type="button" class="btn btn-danger">Cancel</button>
+          <a routerLink="/usersSearch"><button type="button" class="btn btn-danger">Cancel</button></a> 
           </div>
         </td>
       </tr>

@@ -11,8 +11,8 @@ export class UserServiceService {
  
   constructor(private http:HttpClient) { }
 
-  createUser(userMTO: object){
-    return this.http.post(`${this.appRoot}`+'/core/saveUser?action=create', userMTO);  
+  createUser(userMTO: object,action:string){
+    return this.http.post(`${this.appRoot}/core/saveUser?action=${action}`, userMTO);  
   }
 
   getmembersList(): Observable<any>{

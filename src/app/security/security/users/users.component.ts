@@ -4,6 +4,7 @@ import { UserServiceService } from '../User/user-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserVO } from '../User/UserVO';
 import { MemberBankVO } from '../User/MemberBankVO';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -17,14 +18,15 @@ export class UsersComponent implements OnInit {
   }
   
   ngOnInit(): void {
-   this.route.paramMap.subscribe(params =>{
-      const memberId = params.get('memberId');
-       if(memberId!=undefined){
-            this.userService.getmemberbyId(memberId).subscribe(
-              (member:UserVO) => this.patchmember(member),
-            )
-       }
-   })
+    this.route.queryParams.subscribe(params => {
+      const action = params['action'];
+      const memberautoId =  params['memberautoId'];
+      if(action=="edit"){
+        this.userService.getmemberbyId(memberautoId).subscribe(
+          (member:UserVO) => this.patchmember(member),
+        )
+      }
+    })
   }
 
   memberMTO: FormGroup = this.formbuilder.group({
@@ -63,30 +65,20 @@ export class UsersComponent implements OnInit {
   })
 
   createUser(){
-    this.userService.createUser(this.memberMTO.value).subscribe(() =>{
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const action = urlParams.get('action'); 
+    this.userService.createUser(this.memberMTO.value,action).subscribe(() =>{
+      Swal.fire({
+        title: "Good job!",
+        text: "Form Sucessfully Submited",
+        icon: "success"
+      });
       });
   }
 
   patchmember(member:UserVO){
-     this.memberMTO.patchValue({
-      memberVO : {
-        id :member.id,
-        title : member.title,
-        firstName : member.firstName,
-        lastName : member.lastName,
-        middleName : member.middleName,
-        adharNumber : member.adharNumber,
-        email : member.email,
-        country : member.country,
-        dateOfBirth  : member.dateOfBirth,
-        mobileNumber :member.mobileNumber,
-        lanNumber : member.lanNumber,
-        panNumber : member.panNumber,
-        age : member.age,
-        status : member.status
-      }
-     });
+    this.memberMTO.get('memberVO').patchValue(member);
+     this.memberMTO.get('memberVO.memberCommVO').patchValue(member.memberCommVO);
     this.setmemberbankvos(member.memberBanksVOs);
   }
 
@@ -97,16 +89,10 @@ export class UsersComponent implements OnInit {
   setmemberbankvos( memberBanksVOs : MemberBankVO[]){
     const memberBanksFormArray = this.memberMTO.get('memberVO.memberBanksVOs') as FormArray;
       memberBanksFormArray.clear();
-      memberBanksVOs.forEach(bank => {
-        memberBanksFormArray.push(this.formbuilder.group({
-          id: bank.id,
-          bank: bank.bank,
-          accountno: bank.accountno,
-          branch: bank.branch,
-          ifscCode: bank.ifscCode,
-          accountType: bank.accountType
-        }));
-      });
+     for(let i=0;i<memberBanksVOs.length;i++){
+      this.addBank();
+     }
+     memberBanksFormArray.patchValue(memberBanksVOs);
   }
 
   addBank() {

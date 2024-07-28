@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: 'divatech', component: AdminComponent},
     { path: 'usersSearch', component: UserSearchComponent},
     { path: 'createUser', component: UsersComponent},
-    { path: 'edit/:memberId', component: UsersComponent},
+    { path: 'editmember', component: UsersComponent},
     { path: 'create-module', component: ModuleCreationComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'dash-borad', component: DashBoardComponent},

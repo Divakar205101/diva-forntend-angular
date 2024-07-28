@@ -7,10 +7,7 @@
     padding: 0;
 }
 
-html,body {
-    height: 100%;
-    margin: 0;
-}
+
 
 div {
     display: block;
@@ -197,15 +194,38 @@ td {
     padding-right: 20px;
 }
 
-app-body {
-    width: 100%;
-    min-height: 80%;
-    height: auto;
-    z-index: 0;
-    position: relative;
-    top:0;
-    transition: all .5s ease;
-    background: #e2d8db;
+
+  table.innertable td{
+    padding: 5px 5px 5px 5px;
+    margin: 0;
   }
+
+  .admincmt {
+   height: 100%;
+  }
+
+/* styles.css (global styles) */
+html, body, app-root {
+    height: 100%;
+    margin: 0;
+}
+
+/* styles.css (global styles) */
+app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.admin-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+
+ 
 
   
