@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from '../User/user-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserVO } from '../User/UserVO';
 import { MemberBankVO } from '../User/MemberBankVO';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private formbuilder :FormBuilder,private userService : UserServiceService,private route : ActivatedRoute){
+  constructor(private formbuilder :FormBuilder,private userService : UserServiceService,private route : ActivatedRoute,private router: Router){
 
   }
   
@@ -67,13 +67,27 @@ export class UsersComponent implements OnInit {
   createUser(){
     const urlParams = new URLSearchParams(window.location.search);
     const action = urlParams.get('action'); 
-    this.userService.createUser(this.memberMTO.value,action).subscribe(() =>{
-      Swal.fire({
-        title: "Good job!",
-        text: "Form Sucessfully Submited",
-        icon: "success"
-      });
-      });
+    this.userService.createUser(this.memberMTO.value,action).subscribe(
+      (response:any) =>{
+        let message = '';
+        message = action=='create' ? 'User Sucessfully Created' : 'User Sucessfully Updated';
+        Swal.fire({
+          title: response.memberVO.firstName+" "+response.memberVO.lastName,
+          text: message,
+          icon: "success"
+        }).then(()=>{
+          this.router.navigate(['/admin/usersSearch']);
+        })
+      },(error) =>{
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
+      }
+    
+    );
   }
 
   patchmember(member:UserVO){

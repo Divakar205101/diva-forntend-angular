@@ -23,7 +23,7 @@ export class LoginComponent {
     this.authService.loginUser(this.userVO.value).subscribe(
       (token: string) => {
         localStorage.setItem('jwtToken', token);
-        this.router.navigate(['/dash-borad']);
+        this.router.navigate(['/admin']);
       },
       (error: any) => {
         console.error('Error logging in:', error);

@@ -17,6 +17,7 @@ import { MyInterceptorInterceptor } from './shared/my-interceptor.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { BodyComponent } from './body/body.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -33,7 +34,8 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     MenuComponent,
     BodyComponent,
     DashBoardComponent,
-    AdminComponent
+    AdminComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

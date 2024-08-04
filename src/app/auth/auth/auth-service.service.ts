@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthServiceService {
   
+  
   appRoot = environment.BASE_URL;
 
   private baseUrl = 'http://localhost:8084/auth';
@@ -28,7 +29,12 @@ export class AuthServiceService {
     const url = `${this.baseUrl}/gentoken?email=${email}&password=${password}`;
     return this.http.get(url,{ responseType: 'text' });    
   }
-  
+
+  authenticated() :boolean {
+    return   localStorage.getItem("jwtToken")!=null;
+   }
+
+ 
   
 
   // getUserByEmail(email: string): Observable<User[]> {

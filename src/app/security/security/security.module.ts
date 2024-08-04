@@ -6,9 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModuleSearchComponent } from './module-search/module-search.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { AuthGuard } from 'src/app/auth/guard/auth.guard';
 
 const routes : Routes =[
- 
+  { path: 'user', component: UsersComponent ,canActivate: [AuthGuard],}, 
 ]
 
 @NgModule({

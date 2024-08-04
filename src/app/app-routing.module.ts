@@ -8,21 +8,45 @@ import { RegisterComponent } from './auth/auth/register/register.component';
 import { UserSearchComponent } from './security/security/user-search/user-search.component';
 import { DashBoardComponent } from './pages/dash-board/dash-board.component';
 import { AdminComponent } from './admin/admin.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/guard/auth.guard';
+
 
 
 const routes: Routes = [ 
     { path: 'login', component: LoginComponent},
-    { path: 'divatech', component: AdminComponent},
-    { path: 'usersSearch', component: UserSearchComponent},
-    { path: 'createUser', component: UsersComponent},
-    { path: 'editmember', component: UsersComponent},
-    { path: 'create-module', component: ModuleCreationComponent},
+    { path: 'usersSearch', component: UserSearchComponent,canActivate: [AuthGuard],},
+    { path: 'createUser', component: UsersComponent,canActivate: [AuthGuard],},
+    { path: 'editmember', component: UsersComponent,canActivate: [AuthGuard],},
+    { path: 'create-module', component: ModuleCreationComponent,canActivate: [AuthGuard],},
     { path: 'register', component: RegisterComponent},
-    { path: 'dash-borad', component: DashBoardComponent},
-    { path: 'moduleSearch', component: ModuleSearchComponent},
-    { path: 'user', component: UsersComponent }, 
-    { path: '', redirectTo: '/login', pathMatch: 'full'}
+    {
+      path: 'admin',  // Admin route
+      component: AdminComponent,
+      canActivate: [AuthGuard],  // Protect this route
+      children: [
+        {
+          path: '',  // Default child route for admin, loads the dashboard
+          component: DashBoardComponent
+        },
+        {
+          path: 'userscreate',  // Child route for creating users
+          component: UsersComponent,canActivate: [AuthGuard],
+        },
+        { path: 'usersSearch', 
+          component: UserSearchComponent,canActivate: [AuthGuard],
+        },
+        { path: 'moduleSearch', component: ModuleSearchComponent,canActivate: [AuthGuard],},
+        { path: 'editmember', component: UsersComponent,canActivate: [AuthGuard],},
+      ]
+    
 
+      
+    },
+    { path: 'moduleSearch', component: ModuleSearchComponent,canActivate: [AuthGuard],},
+    {path:'page-not-found',component:PageNotFoundComponent,canActivate: [AuthGuard],},
+    { path: '', redirectTo: '/login', pathMatch: 'full'},
+    // {path:'**',redirectTo:'page-not-found',pathMatch: 'full'}
 ];
 
 @NgModule({
